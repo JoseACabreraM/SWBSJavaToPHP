@@ -1,5 +1,7 @@
 <?php 
 
+include 'Token.php';
+
 public class Lexer {
 
   //static String letters = "abcdefghijklmnopqrstuvwxyz";
