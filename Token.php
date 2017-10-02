@@ -1,71 +1,43 @@
 <?php 
 
-	$type;
-	$str;
-	$val;
 class Token {
-    // Token objects are returned by the Lexer
-    
-	/*
-	public enum TokenList {
-        LPAREN, RPAREN, LBRACKET, RBRACKET, LESS, EQUAL, COLON, ID, VALUE, IF, ELSE, EOF, INVALID
-    }
-	*/
-	
+
+  public $type;
+	public $str;
+	public $val;
+  
 	const __default = self::INVALID;
 	const LPAREN = 0;
 	const RPAREN = 1;
 	const LBRACKET = 2;
-	const LESS = 3;
-	const EQUAL = 4;
-	const COLON = 5;
-	const ID = 6;
-	const VALUE = 7;
-	const __IF = 8;
-	const __ELSE = 9;
-	const EOF = 10;	
-	const INVALID = 11;	
-	
-    //TokenList type;
-	//String str;
-    //int val;
-	
+  const RBRACKET = 3;
+	const LESS = 4;
+	const EQUAL = 5;
+	const COLON = 6;
+	const ID = 7;
+	const VALUE = 8;
+	const __IF = 9;
+	const __ELSE = 10;
+	const EOF = 11;	
+	const INVALID = 12;	
 
-	
 	function __construct() {
-        $argv = func_get_args();
-        switch( func_num_args() ) {
-            case 1:
-                self::__construct1($argv[0]);
-                break;
-            case 2:
-                self::__construct2($argv[0], $argv[1]);
-                break;
-            case 3:
-                self::__construct2($argv[0], $argv[1], $argv[2]);
-         }
+    $argv = func_get_args();
+    switch( func_num_args() ) {
+      case 1:
+        self::__construct1($argv[0]);
+        break;
+      case 2:
+        self::__construct2($argv[0], $argv[1]);
+        break;
+      case 3:
+        self::__construct3($argv[0], $argv[1], $argv[2]);
     }
- 
-	/*
-    public Token(TokenList theType) {
-        type = theType;
-    }
+  }
 
-    public Token(TokenList theType, String theString) {
-        type = theType;
-        str = theString;
-    }
-
-    public Token(TokenList theType, String theString, int theVal) {
-        type = theType;
-        str = theString;
-        val = theVal;
-    }
-	*/
-	
 	public function __construct1($theType) {
 		$this->type = $theType;
-    }
+  }
  
   public function __construct2($theType, $theString) {
     $this->type = $theType;
@@ -77,8 +49,6 @@ class Token {
     $this->str = $theString;
     $this->val = $theVal;
   }
-	
-	//$test = new Token('EOF');
-	//echo $test;
+  
 }
 ?>
