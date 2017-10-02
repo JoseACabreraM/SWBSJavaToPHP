@@ -1,5 +1,9 @@
 <?php 
-public class Token extends SplEnum {
+
+	$type;
+	$str;
+	$val;
+class Token {
     // Token objects are returned by the Lexer
     
 	/*
@@ -9,26 +13,24 @@ public class Token extends SplEnum {
 	*/
 	
 	const __default = self::INVALID;
-	const LPAREN = "LPAREN";
-	const RPAREN = "RPAREN";
-	const LBRACKET = "LBRACKET";
-	const LESS = "LESS";
-	const EQUAL = "EQUAL";
-	const COLON = "COLON";
-	const ID = "ID";
-	const VALUE = "VALUE";
-	const __IF = "__IF";
-	const __ELSE = "__ELSE";
-	const EOF = "EOF";	
-	const INVALID = "INVALID";	
+	const LPAREN = 0;
+	const RPAREN = 1;
+	const LBRACKET = 2;
+	const LESS = 3;
+	const EQUAL = 4;
+	const COLON = 5;
+	const ID = 6;
+	const VALUE = 7;
+	const __IF = 8;
+	const __ELSE = 9;
+	const EOF = 10;	
+	const INVALID = 11;	
 	
     //TokenList type;
 	//String str;
     //int val;
 	
-	$type;
-	$str;
-	$val;
+
 	
 	function __construct() {
         $argv = func_get_args();
@@ -62,19 +64,19 @@ public class Token extends SplEnum {
 	*/
 	
 	public function __construct1($theType) {
-		$type = $theType;
+		$this->type = $theType;
     }
  
-    public function __construct2($theType, $theString) {
-		$type = $theType;
-		$str = $theString;
-    }
+  public function __construct2($theType, $theString) {
+    $this->type = $theType;
+    $this->str = $theString;
+  }
  
-    public function __construct3($theType, $theString, $theVal) {
-		$type = $theType;
-		$str = $theString;
-		$val = $theVal;
-    }
+  public function __construct3($theType, $theString, $theVal) {
+    $this->type = $theType;
+    $this->str = $theString;
+    $this->val = $theVal;
+  }
 	
 	//$test = new Token('EOF');
 	//echo $test;

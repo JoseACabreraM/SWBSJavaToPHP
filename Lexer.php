@@ -2,23 +2,23 @@
 
 include 'Token.php';
 
-public class Lexer {
 
+
+
+class Lexer {
   //static String letters = "abcdefghijklmnopqrstuvwxyz";
   //static String digits = "0123456789";
   
   static $letters = "abcdefghijklmnopqrstuvwxyz";
   static $digits = "0123456789";
-
+  public $prog = array();
+  public $i;
   //private char[] prog; //char array containing the characters of the program
   //private int i; //index of the current character
-  
-  $prog[];
-  $i;
-  
+ 
   function __construct($s){
-	  $prog = str_split($s);
-	  $i = 0;
+	  $this->prog = str_split($s);
+	  $this->i = 0;
   }
   
   /*
@@ -30,66 +30,66 @@ public class Lexer {
   */
   
     public function nextToken(){
-		//skip blanks and new lines
-		while ( $i < sizeof($prog) && ($prog[$i]==' ' || $prog[$i]== PHP_EOL)){
-		  $i++;
-		}
+      //skip blanks and new lines
+      while ( $this->i < sizeof($this->prog) && ($this->prog[$this->i]==' ' || $this->prog[$this->i]== PHP_EOL)){
+        $this->i++;
+      }
+      
+      if ($this->i >= sizeof($this->prog)){
+        return new Token(TokenList::EOF);
+      }
 		
-		if ($i >= sizeof($prog)){
-		  return new Token(TokenList::EOF);
-		}
-		
-		switch ($prog[$i]) {
-			case '(':
-				$i++;
-				return new Token(Token::LPAREN, "(");
-			case ')':
-				$i++;
-				return new Token(Token::RPAREN,")");
-			case '{':
-				$i++;
-				return new Token(Token::LBRACKET, "{");
-			case '}':
-				$i++;
-				return new Token(Token::RBRACKET,"}");            
-			case '<':
-				$i++;
-				return new Token(Token::LESS,"<");
-			case '=':
-				$i++;
-				return new Token(Token::EQUAL,"=");            
-			case ':':
-				$i++;
-				return new Token(Token::COLON,":");         
-		}
-		
-		if (strpos($digits, $prog[$i]) != -1){ 
-			// prog[i] is a digit. We only allow one digit
-			$digit = $prog[$i];
-			$i++;
-			return new Token(TokenList.VALUE, "".$digit , intval($digit));
-		}
-		
-		if (strpos($letters, $prog[$i]) != -1){
-			$id = "";
-			while ($i < sizeof($prog) && strpos($letters, $prog[$i]) != -1){
-				$id += $prog[i];
-				$i++;
-			}
-			// check against reserved words
-			if ($id == "if"){
-				return new Token(Token::__IF,$id);
-			}
-			if ($id == "else"){
-				return new Token(Token::__ELSE,$id);
-			} 
-			if (sizeof(id) == 1) {
-				// We only allow one lower case letter as identifier
-				return new Token(Token::ID, $id);
-			}
-			return new Token(Token::INVALID, "");
-		}
-		return new Token(Token::INVALID, "");
+      switch ($this->prog[$this->i]) {
+        case '(':
+          $this->i++;
+          return new Token(Token::LPAREN, "(");
+        case ')':
+          $this->i++;
+          return new Token(Token::RPAREN,")");
+        case '{':
+          $this->i++;
+          return new Token(Token::LBRACKET, "{");
+        case '}':
+          $this->i++;
+          return new Token(Token::RBRACKET,"}");            
+        case '<':
+          $this->i++;
+          return new Token(Token::LESS,"<");
+        case '=':
+          $this->i++;
+          return new Token(Token::EQUAL,"=");            
+        case ':':
+          $this->i++;
+          return new Token(Token::COLON,":");         
+      }
+      
+      if (strpos(Lexer::$digits, $this->prog[$this->i]) != -1){ 
+        // prog[i] is a digit. We only allow one digit
+        $digit = $this->prog[$this->i];
+        $this->i++;
+        return new Token(Token::VALUE, "".$digit , intval($digit));
+      }
+      
+      if (strpos(Lexer::$letters, $this->prog[$this->i]) != -1){
+        $id = "";
+        while ($this->i < sizeof($this->prog) && strpos(Lexer::$letters, $this->prog[$this->i]) != -1){
+          $id += $this->prog[i];
+          $this->i++;
+        }
+        // check against reserved words
+        if ($id == "if"){
+          return new Token(Token::__IF,$id);
+        }
+        if ($id == "else"){
+          return new Token(Token::__ELSE,$id);
+        } 
+        if (sizeof($id) == 1) {
+          // We only allow one lower case letter as identifier
+          return new Token(Token::ID, $id);
+        }
+        return new Token(Token::INVALID, "");
+      }
+      return new Token(Token::INVALID, "");
   }
   /*
   public Token next(){
