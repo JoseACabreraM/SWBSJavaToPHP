@@ -22,7 +22,7 @@ include 'Lexer.php';
       while ( ($programsInputLine = fgets($inp) ) != false){
         $inputUrl = $programsInputLine;
         $inputUrl = trim ($inputUrl);
-        print $inputUrl."\n\n";
+        print $inputUrl."\n";
         $program = "";
         try {
           $in = fopen($inputUrl, "r");
@@ -46,7 +46,6 @@ include 'Lexer.php';
           print "<br/>Program parsing aborted\n";
         }
         print "\n";
-        
       }
     } catch (Exception $e) {
         print "Caught exception! \n";
@@ -62,7 +61,6 @@ include 'Lexer.php';
     }
     print "\n";
     execResults($indent);
-    print "\n";
   }
 
   function execStatement($indent, $executing){
@@ -201,7 +199,7 @@ include 'Lexer.php';
       if (array_key_exists($c, $values)){
         print "The value of ".$c." is ".$values[$c]."\n";
       } else {
-        print "The value of ".$c." is undefined";
+        print "The value of ".$c." is undefined\n";
       }
     }
   }
