@@ -43,7 +43,7 @@ include 'Lexer.php';
             throw new Exception();
           }
         } catch (Exception $e) {
-          print "<br/>Program parsing aborted\n";
+          print "<br/>Program parsing aborted";
         }
         print "\n";
       }
@@ -77,7 +77,7 @@ include 'Lexer.php';
     $c = $currentToken->str{0};
     $currentToken = $lex->nextToken();
     if ($currentToken->type != Token::EQUAL){
-      print "/n equal sign expected";
+      print "/n equal sign expected\n";
       throw new Exception();
     }
     $currentToken = $lex->nextToken();
